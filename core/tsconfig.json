@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "jsx": "react", // still use React-style transform
+        "jsxFactory": "JSX",
+        "jsxFragmentFactory": "Fragment",
+        "baseUrl": "/jsx",
+        "module": "ESNext",
+        "target": "ESNext"
+    }
+}

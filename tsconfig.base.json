@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "@thunderstormjs/core",
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "Bundler",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@thunderstormjs/core/jsx-runtime": [
+                "core/jsx/jsx-runtime.ts"
+            ]
+        }
+    },
+    "include": [
+        "example", // your code
+        "core/jsx/global.d.ts" // 👈 ensure this file is included
+    ]
+}

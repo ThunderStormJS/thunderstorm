@@ -1,0 +1,16 @@
+{
+    "name": "@thunderstormjs/core",
+    "version": "0.1.0",
+    "keywords": [
+        "latest"
+    ],
+    "main": "src/index.js",
+    "types": "src/index.d.ts",
+    "exports": {
+        ".": "./src/index.ts",
+        "./jsx-runtime": "./jsx/jsx-runtime.ts"
+    },
+    "scripts": {
+        "build": "tsc -p tsconfig.json"
+    }
+}
