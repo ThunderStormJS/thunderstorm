@@ -1,10 +1,29 @@
 {
     "compilerOptions": {
-        "jsx": "react", // still use React-style transform
-        "jsxFactory": "JSX",
-        "jsxFragmentFactory": "Fragment",
-        "baseUrl": "/jsx",
-        "module": "ESNext",
-        "target": "ESNext"
-    }
-}
+      // --- JSX Configuration ---
+      "jsx": "react",                       // use modern JSX transform
+      //"jsxImportSource": "@thunderstormjs/core", // where JSX functions live
+      "jsxFactory": "JSX",
+      "jsxFragmentFactory": "Fragment",
+  
+      // --- Module Resolution ---
+      "baseUrl": ".",                           // relative to ./core
+      "paths": {
+        "*": ["./src/*", "./node_modules/*"]   // look in ./core/src then ./node_modules
+      },
+  
+      // --- Output & Compatibility ---
+      "target": "ESNext",
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "resolveJsonModule": true,
+      "strict": true,
+      "skipLibCheck": true,
+      "rootDir": "src",
+      "outDir": "dist"
+    },
+    "include": ["src"]
+  }
+  

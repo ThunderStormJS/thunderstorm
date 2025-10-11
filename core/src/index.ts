@@ -16,6 +16,26 @@ class ThunderStorm {
             this.options.mode = opts.mode === 'dark' ? 'dark' : 'light'
         },
 
+        List: async () => {
+            const pattern = '**/*'
+            const themesFile = `./theme/themes.json`
+            try {
+                const response = await fetch(themesFile).catch(() => null)
+
+                let themes: string[] = []
+
+                if (response && response.ok) {
+                    const data = await response.json()
+                    themes = data.themes || []
+                }
+
+                console.log(`⚡ Available themes → ${themes.join(`,`)}`)
+                return themes
+            } catch (err) {
+                console.error(`⚠️ Failed to load themes.json`, err)
+            }
+        },
+
         Load: async (name: string, opts?: ThemeOptions) => {
             if (opts) this.Theme.Settings(opts)
 
@@ -52,8 +72,8 @@ class ThunderStorm {
                         img.src = `${themePath}${file}`
                     }
                 }
-
-                console.log(`⚡ Loaded theme → ${name}`)
+                const available = `(files: ${files.join(',')})`
+                console.log(`⚡ Loaded theme → ${name} ${available}`)
             } catch (err) {
                 console.error(`⚠️ Failed to load theme → '${name}':`, err)
             }

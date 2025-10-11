@@ -1,5 +1,4 @@
 export function addElement(id: string) {
-    if (!id) return
 
     // Define your desired section order globally or within this module
     const order = ['top', 'side', 'header', 'main', 'footer']

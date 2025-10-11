@@ -9,6 +9,7 @@ Theme.Settings({
     animations: false,
 })
 
+Theme.List()
 Theme.Load('default')
 
 Menu.Top()
@@ -22,7 +23,7 @@ Body.Main([hello, second]) // use an imported function
 Body.Footer([<div style="background:blue;color:white;">⚡ Footer ⚡</div>]) // use an inline element
 
 // log to the console
-console.log('⚡ Hello, World! ⚡')
+console.log('⚡ Hello, World! ⚡') 
 
 setTimeout(async () => {
     Body.Main([<h1>⚡ Let's make some thunder!! ⚡</h1>])

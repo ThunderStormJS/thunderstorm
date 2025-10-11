@@ -45,6 +45,7 @@ async function build() {
     print(`[ ${emojii.tick} ] build complete → ${pc.cyanBright(outPath)}`)
 }
 
+/*
 export async function buildThemes() {
     const THEMES_DIR = resolve('./theme')
     const DIST_DIR = resolve('./dist/theme')
@@ -88,3 +89,59 @@ export async function buildThemes() {
         print(`[ ${emojii.tick} ] theme added → ${pc.whiteBright(themeName)} (${files.length} files)`)
     }
 }
+*/
+
+export async function buildThemes() {
+    const THEMES_DIR = resolve('./theme')
+    const DIST_DIR = resolve('./dist/theme')
+  
+    mkdirSync(DIST_DIR, { recursive: true })
+  
+    // read all subdirectories in ./theme
+    const themeDirs = readdirSync(THEMES_DIR).filter((name) => {
+      const fullPath = join(THEMES_DIR, name)
+      return statSync(fullPath).isDirectory()
+    })
+  
+    for (const themeName of themeDirs) {
+      const srcDir = join(THEMES_DIR, themeName)
+      const destDir = join(DIST_DIR, themeName)
+      mkdirSync(destDir, { recursive: true })
+  
+      const files = []
+      const walk = (dir, base = '') => {
+        for (const entry of readdirSync(dir)) {
+          const full = join(dir, entry)
+          const rel = base ? `${base}/${entry}` : entry
+          const stat = statSync(full)
+          if (stat.isDirectory()) {
+            walk(full, rel)
+          } else if (/\.(css|png|jpg|jpeg|webp|svg|gif|ico)$/i.test(entry)) {
+            files.push(rel)
+            const destPath = join(destDir, rel)
+            mkdirSync(join(destPath, '..'), { recursive: true })
+            copyFileSync(full, destPath)
+          }
+        }
+      }
+  
+      // walk the `./theme/<themeName>` directory and copy files
+      walk(srcDir)
+  
+      // create manifest.json for each theme
+      const manifestPath = join(destDir, 'manifest.json')
+      writeFileSync(manifestPath, JSON.stringify({ name: themeName, files }, null, 2))
+  
+      print(`[ ${emojii.tick} ] theme added → ${pc.whiteBright(themeName)} (${files.length} files)`)
+    }
+  
+    // ✅ Write the global themes.json file
+    const themesJsonPath = join(THEMES_DIR, 'themes.json')
+    const distJsonPath = join(DIST_DIR, 'themes.json')
+    const themesJson = { themes: themeDirs }
+
+    writeFileSync(themesJsonPath, JSON.stringify(themesJson, null, 2))
+    writeFileSync(distJsonPath, JSON.stringify(themesJson, null, 2))
+  
+    print(`[ ${emojii.tick} ] themes.json created → ${pc.cyan(themesJsonPath)}`)
+  }
