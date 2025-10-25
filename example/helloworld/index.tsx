@@ -15,8 +15,8 @@ Theme.Load('default')
 Menu.Top()
 Menu.Side()
 
-const hello = await HelloWorld()
-const second = <h2>⚡ H2 Heading ⚡</h2>
+const hello = HelloWorld()
+const second = <h2>🌩️⚡ H2 Heading ⚡🌩️</h2>
 
 Body.Header([<div style="background:red; color:white;">⚡ Header ⚡</div>]) // use an inline element
 Body.Main([hello, second]) // use an imported function
